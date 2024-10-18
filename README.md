@@ -12,3 +12,6 @@
 - Supply the `dotnet` command with the path to the `.dll` file and it will run
 - Install the .NET runtime with `sudo dnf install aspnetcore-runtime-3.0`
 	- I'm stuck on 3.0 at work so you gotta install the legacy runtime :(
+## Additional Resouces
+- [Installing .NET runtime](https://learn.microsoft.com/en-us/dotnet/core/install/linux-fedora)
+- [Using dotnet CLI](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build)
