@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33801.447
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BYTE-team3-example-server", "BYTE-team3-example-server\BYTE-team3-example-server.csproj", "{860E3F65-D515-4CBD-A8CA-3BB3B96A5A55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{860E3F65-D515-4CBD-A8CA-3BB3B96A5A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{860E3F65-D515-4CBD-A8CA-3BB3B96A5A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{860E3F65-D515-4CBD-A8CA-3BB3B96A5A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{860E3F65-D515-4CBD-A8CA-3BB3B96A5A55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3A7AD47-73FB-41EB-83BD-7A51C4EC7B73}
+	EndGlobalSection
+EndGlobal
