@@ -1,6 +1,6 @@
 # What is this?
 - This is a .NET (ASP.NET) console application that runs a very basic, simple server
-- The server has one endpoint, /weatherforecase
+- The server has one endpoint, /weatherforecast
 - It has it's own self-signed certificate (so ignore any warning associated with that)
 - Runs on port 5001 (HTTPS) and 5000 (HTTP)
 
