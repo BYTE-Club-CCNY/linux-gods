@@ -20,7 +20,8 @@ namespace BYTE_team3_example_server
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>()
+                              .UseUrls("http://0.0.0.0:5000");
                 });
     }
 }
