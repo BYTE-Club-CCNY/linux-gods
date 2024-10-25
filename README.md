@@ -20,6 +20,12 @@
 	- you gotta commit your changes incrementally so you (the coder) can see what you did in the past and me (the reviewer) knows what you did without having to look through each individual line of code 
 	- make sure to keep clear and concise commit messages
 - whatever you do, DO NOT COMMIT NODE MODULES - look into `.gitignore` (resource attached)
+- don't worry about running this on the linux server, after what you guys have done - it should be trivial
+	- from now on, doing this on the server should be done in reservation - as all testing and development should be done locally 
+	- because the server application is a shared computer - it's best practice to verify the integrity of your application seperately
+	- if it comes to it - dockerize your application and test it on your machine to see if it works well on linux
+	- but from now on you should only deploy your applications to the server once you're sure that it runs
+	- no use wasting time and resources on the remote machine when you can test locally
 
 # TODO
 - [ ] create a branch on this repository with your name
