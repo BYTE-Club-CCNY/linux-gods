@@ -3,6 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
+  "scripts": {
+    "bunny": "bun run index.ts"
+  },
     "@types/bun": "latest"
   },
   "peerDependencies": {
