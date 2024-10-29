@@ -2,13 +2,10 @@
   "name": "quickstart",
   "module": "index.ts",
   "type": "module",
-  "devDependencies": {
   "scripts": {
     "bunny": "bun run index.ts"
   },
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+  "devDependencies": {
+    "@types/bun": "^1.0.0"
   }
 }
