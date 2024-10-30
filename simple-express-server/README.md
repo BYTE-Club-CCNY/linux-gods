@@ -35,3 +35,9 @@
   "sqrt": 2
 }
 ```
+- Response if the posted data is invalid (missing parameter, invalid type, negative number):
+```json
+{
+  "error": "message indicating the error"
+}
+```
