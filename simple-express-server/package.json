@@ -1,0 +1,17 @@
+{
+  "name": "simple-express-server",
+  "version": "1.0.0",
+  "description": "Test express server",
+  "main": "app.js",
+  "scripts": {
+    "devStart": "nodemon app.js"
+  },
+  "author": "Ayesha Ilyas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
