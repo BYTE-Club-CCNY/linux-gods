@@ -3,7 +3,7 @@ This is a simpler server that runs on port: `5000` of localhost
 
 ## Run
 - **Bash command**: `curl http://localhost:5000`
-- ** Result**:
+- **Result**:
 ```bash
   _   _      _ _         __        __         _     _ _ 
  | | | | ___| | | ___    \ \      / /__  _ __| | __| | |
@@ -36,7 +36,7 @@ This is a simpler server that runs on port: `5000` of localhost
 
 - **Usage**: `curl curl -X POST http://localhost:5000/post/ -H "Content-Type: application/json" -d '{"number": numerical_varaible}'` Where *numerical_varaible* is the number to test. 
 
-#### DEPENDECIES    
+#### DEPENDECIES
 - Figlet `bun add figlet`
 - Express `bun add express`
 
