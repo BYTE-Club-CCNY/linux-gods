@@ -1,4 +1,5 @@
 import express from "express";
+import figlet from "figlet";
 
 const app = express();
 const port = 5000;
@@ -6,7 +7,8 @@ const port = 5000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-	res.send("Hello, World!");
+	const greeting = figlet.textSync("Hello, World!");
+	res.send(`<pre>${greeting}</pre>`);
 });
 
 app.get("/get/", (req, res) => {
