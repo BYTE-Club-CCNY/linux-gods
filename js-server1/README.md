@@ -1,5 +1,5 @@
 # js-server1
-This is a simpler server that runs on port: `5000` of localhost
+This is a simple server that runs on port: `5000` of localhost
 
 ## Run
 - **Bash command**: `curl http://localhost:5000`
