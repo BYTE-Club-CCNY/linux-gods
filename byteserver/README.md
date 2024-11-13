@@ -1,3 +1,17 @@
+# Micronaut API Example
+
+**Base url** (for local testing): ``http://localhost:8080``
+
+``GET /``
+- Returns the text "api is operational"
+
+``GET /get/``
+- Query parameters are ``name``, ``cohort``, and ``team``. All of these are optional. If one or more are not provided, the value is considered an empty string. 
+- Echos team information in a json list
+Example request: ``http://localhost:8080/get?name=linux+gods&cohort=two&team=4``
+Response: ``["linux gods", "two", "4"]``
+
+
 ## Micronaut 4.6.3 Documentation
 
 - [User Guide](https://docs.micronaut.io/4.6.3/guide/index.html)
