@@ -1,5 +1,6 @@
-# Micronaut API Example
+# Micronaut HTTP Server Example
 
+## API Spec
 **Base url** (for local testing): ``http://localhost:8080``
 
 ``GET /``
@@ -10,6 +11,17 @@
 - Echos team information in a json list
 Example request: ``http://localhost:8080/get?name=linux+gods&cohort=two&team=4``
 Response: ``["linux gods", "two", "4"]``
+
+## How to run the server
+1. Install GraalVM: ``sdk install java 17.0.12-graal``
+NOTE: You need ``sdk`` installed to use to run the above command.
+2. Switch to using GraalVM as the Java Runtime: ``sdk use java 17.0.12-graal``
+3. Build the server: ``./mvnw package -Dpackaging=native-image``
+NOTE: This may take a while.
+4. Run the executable. From the main project directory (linux-gods), run ``byteserver/target/byteserver``
+Now use curl or a browser to access the two endpoints.
+
+For more info, see the offical micronaut getting started guide: https://guides.micronaut.io/latest/creating-your-first-micronaut-app-maven-java.html
 
 
 ## Micronaut 4.6.3 Documentation
