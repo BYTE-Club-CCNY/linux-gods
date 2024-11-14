@@ -6,8 +6,6 @@ import io.micronaut.http.annotation.Produces;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.QueryValue;
 
-import com.github.lalyos.jfiglet.FigletFont;
-
 import java.util.*;
 
 @Controller("/")
@@ -21,14 +19,8 @@ public class TeamController{
     @Produces(MediaType.TEXT_PLAIN)
     public String home() {
         String message = "API is operational";
-        String ascii_art = "";
-        try {
-            ascii_art = FigletFont.convertOneLine(message);
-        } catch (Exception e) {
-            ascii_art = "Error generating ASCII art";
-            e.printStackTrace();
-        }
-        return ascii_art;
+        
+        return message;
     }
     
     // TODO: 2) Get and store 3 parameters
