@@ -11,7 +11,7 @@ import java.util.*;
 @Controller("/")
 
 public class TeamController{
-    private final String[] teamInfo = new String[3]; // Array to store team param
+    private List<String[]> dataStore = new ArrayList<>();
 
     // TODO: 1) return 'API is operational'
 
@@ -26,8 +26,8 @@ public class TeamController{
     // TODO: 2) Get and store 3 parameters
     
     @Get("get")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String[] getTeam(
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getTeam(
             @QueryValue Optional<String> name,
             @QueryValue Optional<String> cohort,
             @QueryValue Optional<String> team
@@ -38,33 +38,16 @@ public class TeamController{
         System.out.println("Team: " + team);
 
         System.out.println("Storing parameters in array");
-        teamInfo[0] = name.orElse("");
-        teamInfo[1] = cohort.orElse("");
-        teamInfo[2] = team.orElse("");
+        String[] teamInfo = { name.orElse(""), cohort.orElse(""), team.orElse("") };
 
-        System.out.println("Array elements:");
-        for (String info: teamInfo) {
-            System.out.println(info);
-        }
-        return teamInfo;
+        dataStore.add(teamInfo);
+
+        return "Data added: Name = " + name + ", Cohort = " + cohort + ", Team = " + team;
     }
 
-/*
-    @Get("greet/{name}")
-    public String greet(String name) {
-        return "Hello, " + name + "!";
+    @Get("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String[]> getAllData() {
+        return dataStore;
     }
-
-    @Get("evenOrOdd")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String evenOrOdd(@QueryValue Optional<Integer> num) {
-        if (num.isPresent()) {
-            String response=(num.get() % 2 == 0)?num.get() + " is Even.": num.get() + " is Odd";
-            return response;
-        } else {
-            return "No number provided.";
-        }
-    }
-*/
-
 }
