@@ -1,32 +1,38 @@
 package simple_server;
 
-import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Produces;
+import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.QueryValue;
-import io.micronaut.http.MediaType;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Optional;
+import com.github.lalyos.jfiglet.FigletFont;
 
+import java.util.*;
 
 @Controller("/")
 
 public class simple_endpoint{
     private final String[] teamInfo = new String[3]; // Array to store team param
 
-    // Goal 1. return 'API is operational'
+    // TODO: 1) return 'API is operational'
+
     @Get 
     @Produces(MediaType.TEXT_PLAIN)
     public String home() {
-        return "API is operational";
+        String message = "API is operational";
+        String ascii_art = "";
+        try {
+            ascii_art = FigletFont.convertOneLine(message);
+        } catch (Exception e) {
+            ascii_art = "Error generating ASCII art";
+            e.printStackTrace();
+        }
+        return ascii_art;
     }
     
-    // Goal 2. Get and store 3 parameters
+    // TODO: 2) Get and store 3 parameters
+    
     @Get("get")
     @Produces(MediaType.APPLICATION_JSON)
     public String[] getTeam(
@@ -46,10 +52,11 @@ public class simple_endpoint{
 
         System.out.println("Array elements:");
         for (String info: teamInfo) {
-            System.out.print(info);
+            System.out.println(info);
         }
         return teamInfo;
     }
+
 /*
     @Get("greet/{name}")
     public String greet(String name) {
