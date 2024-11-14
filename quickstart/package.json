@@ -1,0 +1,14 @@
+{
+  "name": "quickstart",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "bunny": "bun run index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.0.0"
+  },
+  "dependencies": {
+    "figlet": "^1.8.0"
+  }
+}
