@@ -19,27 +19,27 @@ public class Database {
     private final String url = String.format("jdbc:postgresql://%s:%s/%s", host, port, db);
     
     public Database () {
-        System.out.println(url);
         testVariables();
-        String status = tryConnection();
-        System.out.println(status);
+        tryConnection();
     }
 
     // Connection instance definition trial
-    public String tryConnection() {
-        String status;
+    public void tryConnection() {
         try (
             Connection databaseInstance = DriverManager.getConnection(url , user, password)
         ){
-            status = "Database Connection Successful";
+            // pass ig
         } catch (SQLException e) {
-            status = "Database Connection failed: " +
-                 "\nMessage: " + e.getMessage() +
-                 "\nSQL State: " + e.getSQLState() +
-                 "\nError Code: " + e.getErrorCode();
+            throw new RuntimeException(
+                String.format(
+                    "Database Connection failed\nMessage: %s\nSQL State: %s\nError Code: %s",
+                    e.getMessage(),
+                    e.getSQLState(),
+                    e.getErrorCode()
+                )
+            );
         }
-        return status;
-    } 
+    }
 
     public void testVariables() {
         assert host != null : "Host missing";
