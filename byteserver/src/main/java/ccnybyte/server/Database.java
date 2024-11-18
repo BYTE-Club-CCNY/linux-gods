@@ -24,22 +24,22 @@ public class Database {
     }
 
     // Connection instance definition trial
-    public void tryConnection() {
-        try (
-            Connection databaseInstance = DriverManager.getConnection(url , user, password)
-        ){
-            // pass ig
-        } catch (SQLException e) {
-            throw new RuntimeException(
-                String.format(
-                    "Database Connection failed\nMessage: %s\nSQL State: %s\nError Code: %s",
-                    e.getMessage(),
-                    e.getSQLState(),
-                    e.getErrorCode()
-                )
-            );
+    public String tryConnection() {
+    String status;
+    try {
+        Connection databaseInstance = DriverManager.getConnection(url, user, password);
+        status = "Successful connection";
+    } catch (SQLException e) {
+        status = String.format(
+            "Database Connection failed\nMessage: %s\nSQL State: %s\nError Code: %s",
+            e.getMessage(),
+            e.getSQLState(),
+            e.getErrorCode()
+        );
         }
+        return status; // Return the status string
     }
+
 
     public void testVariables() {
         assert host != null : "Host missing";
