@@ -1,5 +1,7 @@
 package ccnybyte.server;
 
+import java.sql.PreparedStatement;
+
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Produces;
@@ -43,12 +45,12 @@ public class TeamController{
     }
     
     // TODO: Test Database
-    @Get("test")
+    @Get("createQuery")
     @Produces(MediaType.TEXT_PLAIN)
     public String test() {
         Database db = new Database();
-        String status = db.tryConnection();
-        return status;
+        PreparedStatement s = db.makeQuery("ayesha", "2", "linux-gods");
+        return s != null ? s.toString() : "could not create statement";
     }
 
     @Get("all")
