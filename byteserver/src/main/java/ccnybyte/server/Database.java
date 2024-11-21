@@ -10,8 +10,11 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database {
 
-    private final Dotenv env_var = Dotenv.load();
-
+    private final Dotenv env_var = Dotenv.configure()
+        .ignoreIfMalformed()
+        .ignoreIfMissing()
+        .load();
+ 
     private final String host = env_var.get("POSTGRESQL_DB_HOST"); 
     private final String port = env_var.get("POSTGRESQL_DB_PORT"); 
     private final String db = env_var.get("POSTGRESQL_DB");
@@ -20,7 +23,7 @@ public class Database {
     private final String url = String.format("jdbc:postgresql://%s:%s/%s", host, port, db);
     
     private Connection connection;
-
+ 
     public Database () {
         assertEnvironmentVariables();
         System.out.println(tryConnection());
@@ -52,12 +55,13 @@ public class Database {
      *  
      */
     public PreparedStatement makeQuery(String name, String cohort, String team) throws SQLException {
-        String query = "SELECT * FROM projects WHERE (name LIKE ? OR ? IS NULL) AND (cohort LIKE ? OR ? IS NULL) AND (team LIKE ? OR ? IS NULL);";
+        String query = "SELECT * FROM projects WHERE (name LIKE ? OR ? IS NULL) AND (cohort LIKE ? OR ? IS NULL);";
         PreparedStatement statement = connection.prepareStatement(query);
         
         String[] filters = {name, cohort, team};
-        for (int i = 1; i < 4; i++) {
-            statement.setString(i, filters[i]);
+        for (int i = 1, j = 0; i < 5; i = i + 2, j++) {
+            statement.setString(i, filters[j]);
+            statement.setString(i + 1, filters[j]);
         }
         return statement;
     }
@@ -68,17 +72,19 @@ public class Database {
             PreparedStatement statement = makeQuery(name, cohort, team);
             return statement.executeQuery();
         } catch (SQLException e) {
-            System.out.println("Could not create SQL Query");
+            System.out.println(
+                e.toString()
+            );
             return null;
         }
         
     }
 
     private void assertEnvironmentVariables() {
-        assert host != null : "Host missing";
-        assert port != null : "Port missing";
-        assert db != null : "Database name missing";
-        assert user != null : "Username missing";
-        assert password != null : "Password missing";
+        assert !"".equals(host) : "Host missing";
+        assert !"".equals(port) : "Port missing";
+        assert !"".equals(db) : "Database name missing";
+        assert !"".equals(user): "Username missing";
+        assert !"".equals(password) : "Password missing";
     }
 }
