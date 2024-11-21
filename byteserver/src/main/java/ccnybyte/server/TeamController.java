@@ -1,6 +1,6 @@
 package ccnybyte.server;
 
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,12 +15,12 @@ import io.micronaut.http.annotation.QueryValue;
 
 public class TeamController{
     private List<String[]> dataStore = new ArrayList<>();
+    private Database db = new ccnybyte.server.Database();
 
     @Get 
     @Produces(MediaType.TEXT_PLAIN)
     public String home() {
-        String message = "API is operational";
-        return message;
+        return "API is operational";
     }
 
     @Get("get")
@@ -36,7 +36,7 @@ public class TeamController{
         System.out.println("Team: " + team);
 
         System.out.println("Storing parameters in array");
-        String[] teamInfo = { name.orElse(""), cohort.orElse(""), team.orElse("") };
+        String[] teamInfo = { name.orElse(null), cohort.orElse(null), team.orElse(null) };
 
         dataStore.add(teamInfo);
 
@@ -46,8 +46,7 @@ public class TeamController{
     @Get("createQuery")
     @Produces(MediaType.TEXT_PLAIN)
     public String test() {
-        Database db = new Database();
-        PreparedStatement s = db.makeQuery("ayesha", "2", "linux-gods");
+        ResultSet s = db.executeQuery("ayesha", "2", null);
         return s != null ? s.toString() : "could not create statement";
     }
 
