@@ -3,6 +3,7 @@ package ccnybyte.server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -106,11 +107,32 @@ public class Database {
         }
     }
 
+    // ** executeQuery **
+    // returns result set of makeQuery 
+public ResultSet executeQuery(String name, String cohort, String team) {
+    
+    // Get the PreparedStatement from makeQuery ^
+    PreparedStatement statement = makeQuery(name, cohort, team);
+    
+    if (statement == null) {
+        System.out.println("Error: Query was not created.");
+        return null;
+    }
+
+    try {
+        // Executes the query and then returns the result
+        return statement.executeQuery();
+    } catch (SQLException e) {
+        System.out.println("Error executing query: " + e.getMessage());
+        return null;
+    }
+}
+
     private void testVariables() {
         assert host != null : "Host missing";
         assert port != null : "Port missing";
         assert db != null : "Database name missing";
         assert user != null : "Username missing";
-        assert password != null : "Passoword missing";
+        assert password != null : "Password missing";
     }
 }
