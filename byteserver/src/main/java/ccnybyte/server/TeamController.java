@@ -1,30 +1,28 @@
 package ccnybyte.server;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import io.micronaut.http.MediaType;
+import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Produces;
-import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.QueryValue;
-
-import java.util.*;
 
 @Controller("/")
 
 public class TeamController{
     private List<String[]> dataStore = new ArrayList<>();
-
-    // TODO: 1) return 'API is operational'
+    private Database db = new ccnybyte.server.Database();
 
     @Get 
     @Produces(MediaType.TEXT_PLAIN)
     public String home() {
-        String message = "API is operational";
-        
-        return message;
+        return "API is operational";
     }
-    
-    // TODO: 2) Get and store 3 parameters
-    
+
     @Get("get")
     @Produces(MediaType.TEXT_PLAIN)
     public String getTeam(
@@ -38,11 +36,18 @@ public class TeamController{
         System.out.println("Team: " + team);
 
         System.out.println("Storing parameters in array");
-        String[] teamInfo = { name.orElse(""), cohort.orElse(""), team.orElse("") };
+        String[] teamInfo = { name.orElse(null), cohort.orElse(null), team.orElse(null) };
 
         dataStore.add(teamInfo);
 
         return "Data added: Name = " + name + ", Cohort = " + cohort + ", Team = " + team;
+    }
+    
+    @Get("createQuery")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String test() {
+        ResultSet s = db.executeQuery("ayesha", "2", null);
+        return s != null ? s.toString() : "could not create statement";
     }
 
     @Get("all")
