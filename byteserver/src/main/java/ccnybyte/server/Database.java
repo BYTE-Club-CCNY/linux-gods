@@ -19,14 +19,13 @@ public class Database {
     private final String db = env_var.get("POSTGRESQL_DB");
     private final String user = env_var.get("POSTGRESQL_DB_USER");
     private final String password = env_var.get("POSTGRESQL_DB_PASSWORD");
-
     private final String url = String.format("jdbc:postgresql://%s:%s/%s", host, port, db);
+    
     private Connection connection;
 
     public Database () {
-        testVariables();
-        String status = tryConnection();
-        System.out.println(status);
+        assertEnvironmentVariables();
+        System.out.println(tryConnection());
     }
 
     // Connection instance definition trial
@@ -128,7 +127,7 @@ public ResultSet executeQuery(String name, String cohort, String team) {
     }
 }
 
-    private void testVariables() {
+    private void assertEnvironmentVariables() {
         assert host != null : "Host missing";
         assert port != null : "Port missing";
         assert db != null : "Database name missing";
