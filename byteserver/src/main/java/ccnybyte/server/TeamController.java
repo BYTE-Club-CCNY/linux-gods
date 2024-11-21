@@ -16,7 +16,6 @@ import io.micronaut.http.annotation.QueryValue;
 public class TeamController{
     private List<String[]> dataStore = new ArrayList<>();
 
-    // TODO: 1) return 'API is operational'
     @Get 
     @Produces(MediaType.TEXT_PLAIN)
     public String home() {
@@ -24,7 +23,6 @@ public class TeamController{
         return message;
     }
 
-    // TODO: 2) Get and store 3 parameters
     @Get("get")
     @Produces(MediaType.TEXT_PLAIN)
     public String getTeam(
@@ -45,7 +43,6 @@ public class TeamController{
         return "Data added: Name = " + name + ", Cohort = " + cohort + ", Team = " + team;
     }
     
-    // TODO: Test Database
     @Get("createQuery")
     @Produces(MediaType.TEXT_PLAIN)
     public String test() {
