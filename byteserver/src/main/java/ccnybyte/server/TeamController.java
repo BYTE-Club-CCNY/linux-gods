@@ -1,8 +1,6 @@
 package ccnybyte.server;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import io.micronaut.http.MediaType;
@@ -14,8 +12,7 @@ import io.micronaut.http.annotation.QueryValue;
 @Controller("/")
 
 public class TeamController{
-    private List<String[]> dataStore = new ArrayList<>();
-    private Database db = new ccnybyte.server.Database();
+    private Database db = new Database();
 
     @Get 
     @Produces(MediaType.TEXT_PLAIN)
@@ -30,29 +27,36 @@ public class TeamController{
             @QueryValue Optional<String> cohort,
             @QueryValue Optional<String> team
             ) {
-        System.out.println("Query parameter values: ");
-        System.out.println("Name: " + name);
-        System.out.println("Cohort: " + cohort);
-        System.out.println("Team: " + team);
-
-        System.out.println("Storing parameters in array");
-        String[] teamInfo = { name.orElse(null), cohort.orElse(null), team.orElse(null) };
-
-        dataStore.add(teamInfo);
-
-        return "Data added: Name = " + name + ", Cohort = " + cohort + ", Team = " + team;
-    }
     
-    @Get("createQuery")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String test() {
-        ResultSet s = db.executeQuery("ayesha", "2", null);
-        return s != null ? s.toString() : "could not create statement";
+        return "Data added: Name = " + name.orElse("") + ", Cohort = " + cohort.orElse("")+ ", Team = " + team.orElse("");
     }
 
-    @Get("all")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<String[]> getAllData() {
-        return dataStore;
+
+    @Get("project") 
+    public Project getProject() {
+        ArrayList<String> team = new ArrayList<>();
+        team.add("ayesha");
+        team.add("feras");
+        team.add("divin");
+
+        ArrayList<String> techStack = new ArrayList<>();
+        techStack.add("Java");
+        techStack.add("Micronaut");
+
+        ArrayList<String> topic = new ArrayList<>();
+        topic.add("DevOps");
+
+        Project project = new Project(1, "Awesome Project", "Short description", "Detailed description", team,
+                                    "http://team-three.com", "image.jpg", techStack, "Fall 2024", topic);
+        System.out.println(project);
+        return project;
+    }
+
+
+    @Get("project1") 
+    public Project getProject1() {
+        Project empty = new Project();
+        System.out.println(empty);
+        return empty;
     }
 }
