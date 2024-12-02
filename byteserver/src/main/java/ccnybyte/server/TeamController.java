@@ -2,6 +2,10 @@ package ccnybyte.server;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.List;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
@@ -21,15 +25,36 @@ public class TeamController{
     }
 
     @Get("get")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getTeam(
-            @QueryValue Optional<String> name,
-            @QueryValue Optional<String> cohort,
-            @QueryValue Optional<String> team
-            ) {
-    
-        return "Data added: Name = " + name.orElse("") + ", Cohort = " + cohort.orElse("")+ ", Team = " + team.orElse("");
+    public ArrayList<String> getTeam(
+        @QueryValue Optional<String> name,
+        @QueryValue Optional<String> cohort,
+        @QueryValue Optional<String> team
+    ) { 
+        ArrayList<String> datastore = new ArrayList<>();
+        try {
+            ResultSet result = db.executeQuery(name, cohort, team);
+            while (result.next()) {
+                Project proj = new Project(
+                    result.getInt(1),  // uid
+                    result.getString(2),  // name
+                    result.getString(3),  // short-desc
+                    result.getString(4),  // long-desc
+                    new ArrayList<>(List.of((String[]) result.getArray(5).getArray())), // team
+                    result.getString(6),  // link
+                    result.getString(7),  // image
+                    new ArrayList<>(List.of((String[]) result.getArray(8).getArray())), // tech-stack
+                    result.getString(9),  // cohort
+                    new ArrayList<>(List.of((String[]) result.getArray(10).getArray())) // topic
+                );
+
+                datastore.add(proj.toString());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Database query failed: " + e.getMessage(), e);
+        }
+        return datastore;
     }
+
 
 
     @Get("project") 
