@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.Optional;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database {
@@ -54,11 +56,11 @@ public class Database {
      * Return: a PreparedStatement or  null if query cannot be created.
      *  
      */
-    public PreparedStatement makeQuery(String name, String cohort, String team) throws SQLException {
+    public PreparedStatement makeQuery(Optional<String> name, Optional<String> cohort, Optional<String> team) throws SQLException {
         String query = "SELECT * FROM projects WHERE (name LIKE ? OR ? IS NULL) AND (cohort LIKE ? OR ? IS NULL);";
         PreparedStatement statement = connection.prepareStatement(query);
         
-        String[] filters = {name, cohort, team};
+        String[] filters = {name.orElse(null), cohort.orElse(null), team.orElse(null)};
         for (int i = 1, j = 0; i < 5; i = i + 2, j++) {
             statement.setString(i, filters[j]);
             statement.setString(i + 1, filters[j]);
@@ -67,7 +69,7 @@ public class Database {
     }
 
 
-    public ResultSet executeQuery(String name, String cohort, String team) {
+    public ResultSet executeQuery(Optional<String> name, Optional<String> cohort, Optional<String> team) {
         try {
             PreparedStatement statement = makeQuery(name, cohort, team);
             return statement.executeQuery();
