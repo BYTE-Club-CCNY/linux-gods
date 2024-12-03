@@ -145,7 +145,7 @@ public class Project {
     @Override
     public String toString() {
         return String.format(
-            "Project {uid=%d, name='%s', shortDesc='%s', longDesc='%s', team=%s, link='%s', image='%s', techStack=%s, cohort='%s', topic=%s}",
+            "{uid=%d, name='%s', shortDesc='%s', longDesc='%s', team=%s, link='%s', image='%s', techStack=%s, cohort='%s', topic=%s}",
             uid, name, shortDesc, longDesc, team, link, image, techStack, cohort, topic
         );
     }
