@@ -25,6 +25,7 @@ public class TeamController{
     }
 
     @Get("get")
+    @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<String> getTeam(
         @QueryValue Optional<String> name,
         @QueryValue Optional<String> cohort,
@@ -53,35 +54,5 @@ public class TeamController{
             throw new RuntimeException("Database query failed: " + e.getMessage(), e);
         }
         return datastore;
-    }
-
-
-
-    @Get("project") 
-    public Project getProject() {
-        ArrayList<String> team = new ArrayList<>();
-        team.add("ayesha");
-        team.add("feras");
-        team.add("divin");
-
-        ArrayList<String> techStack = new ArrayList<>();
-        techStack.add("Java");
-        techStack.add("Micronaut");
-
-        ArrayList<String> topic = new ArrayList<>();
-        topic.add("DevOps");
-
-        Project project = new Project(1, "Awesome Project", "Short description", "Detailed description", team,
-                                    "http://team-three.com", "image.jpg", techStack, "Fall 2024", topic);
-        System.out.println(project);
-        return project;
-    }
-
-
-    @Get("project1") 
-    public Project getProject1() {
-        Project empty = new Project();
-        System.out.println(empty);
-        return empty;
     }
 }
